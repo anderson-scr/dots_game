@@ -1,0 +1,59 @@
+#container-gameConfig {
+  display: flex;
+  justify-content: space-evenly;
+}
+#btnStartGame {
+  width: 20vw;
+}
+
+#container-gameTable {
+  border: 2px solid #6272a4;
+  border-radius: 10px;
+  width: 70vw;
+  height: 60vh;
+  margin: 0 auto;
+  margin-top: 3vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#container-enterPlay {
+  display: flex;
+  justify-content: center;
+  margin-top: 2vh;
+}
+.square {
+  border: 1px solid #44475a;
+  width: 3vw;
+  height: 3vw;
+  position: relative;
+  color: #44475a;
+  text-align: center;
+  line-height: 5.4vh;
+}
+.cornerDot {
+  position: absolute;
+  background-color: #ff79c6;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.topLeft {
+  left: -4px;
+  top: -4px;
+}
+.topRight {
+  right: -4px;
+  top: -4px;
+}
+.bottomLeft {
+  bottom: -4px;
+  left: -4px ;
+}
+.bottomRight {
+  right: -4px;
+  bottom: -4px;
+}
+#iptEnterPlay {
+  margin-right: 2vw;
+}

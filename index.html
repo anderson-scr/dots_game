@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="Styles/defaultStyle.css">
+  <link rel="stylesheet" href="Styles/gameConfigStyle.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="Js/script.js" defer></script>
+  <title>Dots game</title>
+</head>
+<body>
+  <h1>Dots Game</h1>
+  
+  <section id="container-gameConfig">
+    <div>
+      <label for="columnNumber">Number of columns:</label>
+      <input type="number" id="columnNumber">
+    </div>
+
+    <div>
+      <label for="rowNumber">Number of rows:</label>
+      <input type="number" id="rowNumber">
+    </div>
+    <div>
+      <button id="btnStartGame" onclick="generateTable()">Start Ganme</button>
+    </div>
+  </section>
+  
+  <section id="container-gameTable">
+    <!-- This is fullfil with a function -->
+  </section>
+
+  <section id="container-enterPlay">
+    <input type="text" placeholder="col-row" id="iptEnterPlay">
+    <button>Enter Play</button>
+  </section>
+</body>
+</html>
