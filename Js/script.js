@@ -12,13 +12,21 @@ const generateTable = () => {
     let column = `<div class='column col${colId}'>`;
 
     for(squareId = 0; squareId < iptNumberRows.value; squareId++) {
-      const square = `
+      let square = `
       <div class="square sqr${colId}-${squareId}"> ${colId}-${squareId}
-        <div class="cornerDot topLeft"></div>
-        <div class="cornerDot topRight" ></div>
-        <div class="cornerDot bottomLeft"></div>
-        <div class="cornerDot bottomRight"></div>
+        <div class="cornerDot topLeft toolTip"></div>
+        <div class="cornerDot bottomLeft toolTip"></div>
       </div>`;
+
+      if(iptNumberColumns.value == colId + 1) {
+         square = `
+          <div class="square sqr${colId}-${squareId}"> ${colId}-${squareId}
+            <div class="cornerDot topLeft toolTip"></div>
+            <div class="cornerDot topRight toolTip"></div>
+            <div class="cornerDot bottomLeft toolTip"></div>
+            <div class="cornerDot bottomRight toolTip"></div>
+          </div>`;
+      }
       column += square;
       buildObjectDataForTable(colId, squareId);
     };
