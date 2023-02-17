@@ -150,9 +150,10 @@ const cssTheme = `
     width: 3vw;
     height: 3vw;
     position: relative;
-    color: #44475a;
+    color: #efefef;
     text-align: center;
     line-height: 5.4vh;
+    font-weight: 600;
   }
 
   .cornerDot {
@@ -196,18 +197,13 @@ const cssTheme = `
     width: 2.7vw;
     height: 1.7vh;
     bottom: 10px;
-    left: -20px;
+    left: -25px;
     color: #ff79c6;
     white-space: nowrap;
     font-size: .8rem;
     line-height: 1.8vh;
-    opacity: 0;
     z-index: 10;
     transition: .4s opacity ease;
-  }
-
-  .square:hover > .cornerDot::after {
-    opacity: 1;
   }
 `
 const styleSheet = document.createElement("style")
@@ -249,9 +245,28 @@ themeIcon.addEventListener("click", () => {
     onOff = !onOff
   }
 })
+
+dotGameIcon.addEventListener('click', () => {
+  const containerGame = document.querySelector(".container-dotGame")
+  if(openCloseGame) {
+    containerGame.style.display = "none";
+    openCloseGame = false;
+  }
+  else {
+    containerGame.style.display = "flex";
+    openCloseGame = true;
+  }
+})
+
+
 containerIcons.prepend(themeIcon)
 containerIcons.prepend(dotGameIcon)
+// ========================================================================================================== //
 
+
+
+
+// ========================================================================================================== //
 let tableStructureData = {};
 const playersColors = [ "#bd93f9", "#f1fa8c" ]
 let currPlayer = 0;
@@ -337,6 +352,7 @@ function generateTable() {
 function setPlay(playValue) {
   let noJ = playValue.replace("j", "");
   let splitPlayerPlay = noJ.split("-");
+  let entryCount = 1;
 
   Object.entries(tableStructureData).forEach(
     ([key, value]) => {
@@ -351,7 +367,8 @@ function setPlay(playValue) {
         value.element.style.borderLeft = `2px solid ${playersColors[currPlayer]}`;
         tableStructureData[key].left.used = true;
         verifyCompleteSquare(tableStructureData[key]);
-        updatePlayer();
+        entryCount++;
+        if(entryCount == 1) updatePlayer();
         return;
       };
 
@@ -365,7 +382,8 @@ function setPlay(playValue) {
         value.element.style.borderTop = `2px solid ${playersColors[currPlayer]}`;
         tableStructureData[key].top.used = true;
         verifyCompleteSquare(tableStructureData[key]);
-        updatePlayer();
+        entryCount++;
+        if(entryCount == 1) updatePlayer();
         return;
       };
 
@@ -379,7 +397,8 @@ function setPlay(playValue) {
         value.element.style.borderRight = `2px solid ${playersColors[currPlayer]}`;
         tableStructureData[key].right.used = true;
         verifyCompleteSquare(tableStructureData[key]);
-        updatePlayer();
+        entryCount++;
+        if(entryCount == 1) updatePlayer();
         return;
       };
 
@@ -393,7 +412,8 @@ function setPlay(playValue) {
         value.element.style.borderBottom = `2px solid ${playersColors[currPlayer]}`;
         tableStructureData[key].bottom.used = true;
         verifyCompleteSquare(tableStructureData[key]);
-        updatePlayer();
+        entryCount++;
+        if(entryCount == 1) updatePlayer();
         return;
       };
     }
@@ -408,7 +428,12 @@ function verifyPlay(splitPlayerPlay, sideValue) {
 
 function verifyCompleteSquare(square) {
   if(square.left.used && square.top.used && square.right.used && square.bottom.used) {
-    square.element.innerHTML += "X"
+    let player; 
+    currPlayer? player = 'X' : player = 'O';
+    console.log(player)
+    square.element.style.Color = playersColors[currPlayer]
+    square.element.innerHTML += player;
+    return;
   }
 };
 
@@ -416,6 +441,9 @@ function updatePlayer() {
   console.log(currPlayer)
   currPlayer? currPlayer = 0: currPlayer = 1;
 };
+// ========================================================================================================== //
+
+
 
 
 
@@ -433,7 +461,6 @@ const callback = function(mutationList, observer) {
   for (const mutation of mutationList) {
     if (mutation.type === 'childList') {
       let msgText = mutation.addedNodes[0].querySelector(".rcx-message-body > div > p")
-      console.log(msgText.innerText)
       msgText = msgText.innerText
 
       if(msgText == "Play Dots") {
@@ -455,19 +482,3 @@ const observer = new MutationObserver(callback);
 // Start observing the target node for configured mutations
 observer.observe(targetNode, config);
 // ========================================================================================================== //
-
-
-dotGameIcon.addEventListener('click', () => {
-  const containerGame = document.querySelector(".container-dotGame")
-  if(openCloseGame) {
-    containerGame.style.display = "none";
-    openCloseGame = false;
-  }
-  else {
-    containerGame.style.display = "flex";
-
-    const observer = new MutationObserver(callback);
-    observer.observe(targetNode, config);
-    openCloseGame = true;
-  }
-})
